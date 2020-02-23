@@ -12,19 +12,20 @@
  
  */
 
-int mode = 1;
+int mode = 2;
 
 // image path is relative to sketch directory
 PImage img;
-String imgFileName = "MyImage";
-String fileType = "png";
+String imgFileName = "1";
+String fileType = "jpg";
 
 int loops = 1;
+boolean verticle = false;
 
 // threshold values to determine sorting start and end pixels
-int blackValue = -16000000;
-int brightnessValue = 60;
-int whiteValue = -13000000;
+int blackValue = -15000000;
+int brightnessValue = 90;
+int whiteValue = -11000000;
 
 int row = 0;
 int column = 0;
@@ -48,22 +49,45 @@ void setup() {
 
 void draw() {
   
-  // loop through columns
-  while(column < img.width-1) {
-    println("Sorting Column " + column);
-    img.loadPixels(); 
-    sortColumn();
-    column++;
-    img.updatePixels();
-  }
+  if(verticle){
+    
+      // loop through rows
+    while(row < img.height-1) {
+      println("Sorting Row " + column);
+      img.loadPixels(); 
+      sortRow();
+      row++;
+      img.updatePixels();
+    }
+    
+    // loop through columns
+    while(column < img.width-1) {
+      println("Sorting Column " + column);
+      img.loadPixels(); 
+      sortColumn();
+      column++;
+      img.updatePixels();
+    }
+    
   
-  // loop through rows
-  while(row < img.height-1) {
-    println("Sorting Row " + column);
-    img.loadPixels(); 
-    sortRow();
-    row++;
-    img.updatePixels();
+  }else{
+    // loop through columns
+    while(column < img.width-1) {
+      println("Sorting Column " + column);
+      img.loadPixels(); 
+      sortColumn();
+      column++;
+      img.updatePixels();
+    }
+    
+    // loop through rows
+    while(row < img.height-1) {
+      println("Sorting Row " + column);
+      img.loadPixels(); 
+      sortRow();
+      row++;
+      img.updatePixels();
+    }
   }
   
   // load updated image onto surface and scale to fit the display width,height
